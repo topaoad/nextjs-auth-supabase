@@ -19,6 +19,24 @@ export default function AuthButtonClient({
     router.refresh();
   };
 
+  const handleSignInGithub = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "github",
+      options: {
+        redirectTo: "http://localhost:3000/auth/callback",
+      },
+    });
+  };
+
+  const handleSignInGoogle = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: "http://localhost:3000/auth/callback",
+      },
+    });
+  };
+
   const handleSignIn = async () => {
     await supabase.auth.signInWithOAuth({
       provider: "github",
@@ -31,6 +49,9 @@ export default function AuthButtonClient({
   return session ? (
     <button onClick={handleSignOut}>Logout</button>
   ) : (
-    <button onClick={handleSignIn}>Login</button>
+    <>
+      <button onClick={handleSignInGithub}>Login with GitHub</button>
+      <button onClick={handleSignInGoogle}>Login with Google</button>
+    </>
   );
 }

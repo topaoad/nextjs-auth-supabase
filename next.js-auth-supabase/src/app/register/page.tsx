@@ -14,10 +14,16 @@ export default function Register() {
   // supabaseのユーザー登録の関数
   const doRegister = async () => {
     // supabaseで用意されているユーザー登録の関数
-    const { data, error } = await supabase.auth.signUp({ email, password })
+    // const { data, error } = await supabase.auth.signUp({ email, password })
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+      // options: {
+      //   emailRedirectTo: 'https://example.com/welcome'
+      // }
+    })
     if (error) throw new Error(error.message)
-    console.log("data")
-    console.log(data)
+    console.error('Error during registration:', error);
   }
 
   return (
