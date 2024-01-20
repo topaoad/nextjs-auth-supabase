@@ -19,3 +19,4 @@
 - [Next.js + Supabase でログイン周りの機能を実装する](https://qiita.com/masakiwakabayashi/items/716577dbfebf83665378)
 - [Next.js 13 App router Supabase 認証機能付き vns開発用テンプレート](https://qiita.com/masakinihirota/items/12da291e560c4850b511#todo)
 - [Next.js + Supabase でログイン周りの機能を実装する](https://qiita.com/masakiwakabayashi/items/716577dbfebf83665378)
+- [Next.js + Supabase アプリでサーバーやローカル開発環境で、認証に必要な Client ID と Client secrets の取得。(Slack、Google、GitHub)(フロー図がわかりやすい)](https://qiita.com/masakinihirota/items/706326a64dab3ffbf55b)
