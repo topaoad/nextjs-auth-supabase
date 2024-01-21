@@ -14,6 +14,8 @@ model Post {
   published Boolean @default(false)
   author    User?   @relation(fields: [authorId], references: [id])
   authorId  Int?
+  updatedAt DateTime @updatedAt
+
 }
 
 model User {
@@ -21,4 +23,12 @@ model User {
   email String  @unique
   name  String?
   posts Post[]
+}
+
+model Todo {
+  id        Int      @id @default(autoincrement())
+  title     String
+  createdAt DateTime @default(now()) 
+  date     DateTime @default(now())
+  done      Boolean  @default(false)
 }

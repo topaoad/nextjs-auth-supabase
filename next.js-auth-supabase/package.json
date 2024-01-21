@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@prisma/client": "^5.8.0",
+    "@prisma/client": "^5.8.1",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/supabase-js": "^2.39.2",
     "class-variance-authority": "^0.7.0",
