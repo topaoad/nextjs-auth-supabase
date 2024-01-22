@@ -1,12 +1,38 @@
 "use client";
 
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import * as z from "zod"
+import { Button } from "@/components/ui/button"
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+
+const formSchema = z.object({
+  username: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
+})
 
 export const NewTodoForm = () => {
-  const [title, setTitle] = useState('');
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: "",
+    },
+  })
+
+
+  const onSubmit = async (formData: z.infer<typeof formSchema>) => {
 
     try {
       const response = await fetch('http://localhost:3000/api/todo', {
@@ -14,13 +40,13 @@ export const NewTodoForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title }),
+        body: JSON.stringify({ title: formData.username }),
       });
 
       const data = await response.json();
       if (response.ok) {
         alert('ToDoが追加されました！');
-        setTitle(''); // フォームをクリア
+        form.reset()
       } else {
         alert(`エラー: ${data.message}`);
       }
@@ -29,20 +55,29 @@ export const NewTodoForm = () => {
     }
   };
 
-  return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="新しいToDoを入力してください"
-          required
-        />
-        <button type="submit">追加</button>
-      </form>
-    </>
 
-  );
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>投稿内容</FormLabel>
+              <FormControl>
+                <Input placeholder="shadcn" {...field} />
+              </FormControl>
+              <FormDescription>
+                This is your public display name.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">追加</Button>
+      </form>
+    </Form>
+  )
 };
 
