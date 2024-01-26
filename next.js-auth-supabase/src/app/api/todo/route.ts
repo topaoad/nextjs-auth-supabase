@@ -14,8 +14,7 @@ export const connect = async () => {
   }
 }
 
-
-// データベースからデータを取得する
+// データベースからデータを取得する　const res = await fetch('http://localhost:3000/api/todo')から呼び出される
 export const GET = async (req: Request) => {
   try {
     await connect();
