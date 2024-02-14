@@ -9,6 +9,7 @@ import { NewToast } from "@/components/NewToast";
 import { ModeToggle } from "@/components/ModeToggle";
 import { PrismaClient, Todo, } from '@prisma/client';
 import { UserWithProfile } from '@/app/api/user/route'
+import { CodeContactForm } from "@/components/CodeContactForm";
 
 const getTodoList = async () => {
   const res = await fetch('http://localhost:3000/api/todo')
@@ -59,6 +60,7 @@ export default async function Home() {
         </div>
       ))}
       <NewTodoForm />
+      <CodeContactForm />
       <NewToast />
       <ModeToggle />
     </>
