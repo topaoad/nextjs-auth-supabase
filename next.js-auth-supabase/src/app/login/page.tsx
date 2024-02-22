@@ -6,9 +6,7 @@ import AuthButtonClient from "../auth-button-client";
 export default async function Login() {
   const supabase = createServerComponentClient({ cookies });
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const { data: { session }, } = await supabase.auth.getSession();
 
   if (session) {
     redirect("/");
